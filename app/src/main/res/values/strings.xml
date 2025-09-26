@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">FilmPlayer</string>
+    <string name="sherlock_holmes">Sherlock Holmes</string>
+    <string name="main_header">Find Movies, Tv series,\nand more..</string>
+
+    <string name="movies">Movies</string>
+    <string name="tvseries">Tv Series</string>
+    <string name="documentary">Documentary</string>
+    <string name="sports">Sports</string>
+
+    <string-array name="categories_array">
+        <item>@string/movies</item>
+        <item>@string/tvseries</item>
+        <item>@string/documentary</item>
+        <item>@string/sports</item>
+    </string-array>
+</resources>
