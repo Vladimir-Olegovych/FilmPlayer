@@ -6,10 +6,5 @@ import kotlinx.serialization.Serializable
 data class Film(
     val id: Int,
     val name: String,
-    val quality: String,
-    val date: Long,
-    val duration: Long,
-    val rating: Double,
-    val genre: List<String>,
-    val synopsis: String
+    val date: Long
 )

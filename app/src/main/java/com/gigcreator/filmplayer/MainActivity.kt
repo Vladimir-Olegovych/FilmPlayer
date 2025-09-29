@@ -11,10 +11,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.gigcreator.filmplayer.core.navigation.FilmDestination
 import com.gigcreator.filmplayer.core.navigation.HomeDestination
+import com.gigcreator.filmplayer.core.serializableType
+import com.gigcreator.filmplayer.domain.feature.home.model.Film
 import com.gigcreator.filmplayer.feature.film.FilmScreen
 import com.gigcreator.filmplayer.feature.home.HomeScreen
 import com.gigcreator.filmplayer.feature.shared.theme.FilmPlayerTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.reflect.typeOf
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -36,7 +39,9 @@ fun NavigationHost(){
         composable<HomeDestination> {
             HomeScreen(navigateFilm = { film -> navController.navigate(FilmDestination(film)) })
         }
-        composable<FilmDestination> { backStackEntry ->
+        composable<FilmDestination>(
+            typeMap = mapOf(typeOf<Film>() to serializableType<Film>())
+        ) { backStackEntry ->
             val destination = backStackEntry.toRoute<FilmDestination>()
             FilmScreen(film = destination.film, navigateBack = { navController.popBackStack() })
         }

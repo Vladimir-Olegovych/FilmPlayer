@@ -1,22 +1,25 @@
 package com.gigcreator.filmplayer.core
 
-import android.os.Bundle
 import androidx.navigation.NavType
-import com.gigcreator.filmplayer.domain.feature.home.model.Film
+import androidx.savedstate.SavedState
+import androidx.savedstate.read
+import androidx.savedstate.write
 import kotlinx.serialization.json.Json
 
-val FilmNavType = object : NavType<Film>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): Film? =
-        bundle.getString(key)?.let { Json.decodeFromString(it) }
+inline fun <reified T : Any> serializableType(
+    isNullableAllowed: Boolean = false,
+    json: Json = Json,
+) = object : NavType<T>(isNullableAllowed = isNullableAllowed) {
 
-    override fun put(bundle: Bundle, key: String, value: Film) =
-        bundle.putString(key, Json.encodeToString(value))
+    override fun put(bundle: SavedState, key: String, value: T) {
+        bundle.write { putString(key, json.encodeToString(value)) }
+    }
 
-    override fun parseValue(value: String): Film =
-        Json.decodeFromString(value)
+    override fun get(bundle: SavedState, key: String): T? {
+        return json.decodeFromString<T?>(bundle.read { getString(key) })
+    }
 
-    override fun serializeAsValue(value: Film): String =
-        Json.encodeToString(value)
+    override fun parseValue(value: String): T = json.decodeFromString(value)
 
-    override val name: String = "Film"
+    override fun serializeAsValue(value: T): String = json.encodeToString(value)
 }

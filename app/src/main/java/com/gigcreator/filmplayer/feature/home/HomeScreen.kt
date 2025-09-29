@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,7 +74,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenContent(uiState: HomeScreenUiState, navigateFilm: (Film) -> Unit, ) {
     val context = LocalContext.current
-    var query by remember { mutableStateOf("") }
+    var query by rememberSaveable { mutableStateOf("") }
 
     val categories = remember { context.resources.getStringArray(R.array.categories_array) }
     var selectedTabIndex by remember { mutableIntStateOf(0) }

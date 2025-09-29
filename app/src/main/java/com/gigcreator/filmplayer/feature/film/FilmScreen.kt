@@ -30,23 +30,10 @@ import com.gigcreator.filmplayer.feature.shared.components.film.CustomTextShape
 import com.gigcreator.filmplayer.feature.shared.theme.ApplicationColors
 import com.gigcreator.filmplayer.feature.shared.theme.Typography
 
-private val exampleFilm = Film(
-    id = 3,
-    name = "Interstellar",
-    quality = "4K",
-    date = 2014,
-    duration = 10_800_000_000L,
-    rating = 4.7,
-    genre = listOf("Adventure", "Drama", "Sci-Fi"),
-    synopsis = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
-)
-
 @Composable
-fun FilmScreen(navigateBack: () -> Unit, film: Film = exampleFilm) {
+fun FilmScreen(navigateBack: () -> Unit, film: Film) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
-    val imagePainterButton = painterResource(id = R.drawable.ic_arrow_back)
-    val imagePainterImage = painterResource(id = R.drawable.ic_loading)
 
     Column(
         modifier = Modifier
@@ -68,14 +55,14 @@ fun FilmScreen(navigateBack: () -> Unit, film: Film = exampleFilm) {
         ) {
             Image(
                 modifier = Modifier.size(16.dp),
-                painter = imagePainterButton,
+                painter = painterResource(id = R.drawable.ic_arrow_back),
                 contentDescription = film.name
             )
         }
 
         Image(
             modifier = Modifier.fillMaxWidth().height(235.dp),
-            painter = imagePainterImage,
+            painter = painterResource(id = R.drawable.ic_loading),
             contentDescription = film.name,
             contentScale = ContentScale.Crop
         )
@@ -85,12 +72,13 @@ fun FilmScreen(navigateBack: () -> Unit, film: Film = exampleFilm) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
+                modifier = Modifier.weight(1F),
                 text = film.name,
                 style = Typography.latoMedium24,
                 color = Color.White,
             )
 
-            CustomTextShape(text = film.quality, modifier = Modifier.padding(start = 8.dp))
+            CustomTextShape(text = "4K", modifier = Modifier.padding(start = 8.dp))
         }
     }
 }
