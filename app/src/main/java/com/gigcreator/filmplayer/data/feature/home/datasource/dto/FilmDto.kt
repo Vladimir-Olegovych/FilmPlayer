@@ -1,18 +1,25 @@
 package com.gigcreator.filmplayer.data.feature.home.datasource.dto
 
 import com.gigcreator.filmplayer.domain.feature.home.model.Film
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class FilmDto(
-    @SerialName("id") val id: Int,
-    @SerialName("name") val name: String,
-    @SerialName("year") val year: Int
+    val id: Int,
+    val name: String,
+    val quality: String,
+    val date: Long,
+    val duration: Long,
+    val rating: Double,
+    val genre: List<String>,
+    val synopsis: String,
 ) {
     fun toFilm(): Film = Film(
         id = this.id,
         name = this.name,
-        year = this.year
+        quality = this.quality,
+        date = this.date,
+        duration = this.duration,
+        rating = this.rating,
+        genre = this.genre,
+        synopsis = this.synopsis,
     )
 }

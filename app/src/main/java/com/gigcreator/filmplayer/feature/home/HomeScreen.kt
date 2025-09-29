@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +39,7 @@ internal data class HomeScreenUiState(
 
 @Composable
 fun HomeScreen(
+    navigateFilm: (Film) -> Unit,
     vm: HomeScreenViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -61,14 +61,17 @@ fun HomeScreen(
     }
 
     when(state) {
-        is HomeScreenContract.State.Loading -> HomeScreenContent(uiState = uiState)
-        is HomeScreenContract.State.Loaded -> HomeScreenContent(uiState = uiState)
+        is HomeScreenContract.State.Loading,
+        is HomeScreenContract.State.Loaded -> HomeScreenContent(
+            uiState = uiState,
+            navigateFilm = navigateFilm
+        )
         is HomeScreenContract.State.DataError -> {}
     }
 }
 
 @Composable
-private fun HomeScreenContent(uiState: HomeScreenUiState) {
+private fun HomeScreenContent(uiState: HomeScreenUiState, navigateFilm: (Film) -> Unit, ) {
     val context = LocalContext.current
     var query by remember { mutableStateOf("") }
 
@@ -123,6 +126,9 @@ private fun HomeScreenContent(uiState: HomeScreenUiState) {
 
         FilmList(
             films = uiState.films,
+            onClick = { film ->
+                navigateFilm.invoke(film)
+            },
             modifier = Modifier.fillMaxSize().padding(
                 top = 16.dp, start = 14.dp, end = 14.dp
             )

@@ -8,8 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gigcreator.filmplayer.feature.home.HomeScreen
+import androidx.navigation.toRoute
+import com.gigcreator.filmplayer.core.navigation.FilmDestination
 import com.gigcreator.filmplayer.core.navigation.HomeDestination
+import com.gigcreator.filmplayer.feature.film.FilmScreen
+import com.gigcreator.filmplayer.feature.home.HomeScreen
 import com.gigcreator.filmplayer.feature.shared.theme.FilmPlayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +34,11 @@ fun NavigationHost(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = HomeDestination) {
         composable<HomeDestination> {
-            HomeScreen()
+            HomeScreen(navigateFilm = { film -> navController.navigate(FilmDestination(film)) })
+        }
+        composable<FilmDestination> { backStackEntry ->
+            val destination = backStackEntry.toRoute<FilmDestination>()
+            FilmScreen(film = destination.film, navigateBack = { navController.popBackStack() })
         }
     }
 

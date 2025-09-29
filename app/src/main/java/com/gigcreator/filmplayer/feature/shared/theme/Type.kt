@@ -28,6 +28,13 @@ object Typography {
         color = Color.White
     )
 
+    val latoNormal12 = TextStyle(
+        fontFamily = FontFamily(mainFont),
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        color = Color.White
+    )
+
     val latoNormal16 = TextStyle(
         fontFamily = FontFamily(mainFont),
         fontWeight = FontWeight.Normal,

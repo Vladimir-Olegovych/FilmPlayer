@@ -1,9 +1,8 @@
 package com.gigcreator.filmplayer.feature.shared.components.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -15,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.gigcreator.filmplayer.R
 import com.gigcreator.filmplayer.domain.feature.home.model.Film
@@ -22,7 +24,7 @@ import com.gigcreator.filmplayer.feature.shared.theme.ApplicationColors
 import com.gigcreator.filmplayer.feature.shared.theme.Typography
 
 @Composable
-fun FilmList(films: List<Film>, modifier: Modifier) {
+fun FilmList(films: List<Film>, onClick: (Film) -> Unit, modifier: Modifier) {
     val imagePainter = painterResource(id = R.drawable.ic_loading)
 
     LazyVerticalGrid(
@@ -31,27 +33,28 @@ fun FilmList(films: List<Film>, modifier: Modifier) {
     ) {
         items(films) { film ->
             Column(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp, start = 10.dp, end = 10.dp)
+                modifier = Modifier.fillMaxWidth()
+                    .padding(bottom = 20.dp, start = 10.dp, end = 10.dp)
+                    .clickable(onClick = {
+                        onClick.invoke(film)
+                    })
             ) {
                 Image(
                     modifier = Modifier.clip(RoundedCornerShape(16.dp)),
                     painter = imagePainter,
                     contentDescription = film.name
                 )
-                Row(
-                    modifier = Modifier.padding(top = 8.dp)
-                ) {
-                    Text(
-                        text = film.name,
-                        style = Typography.latoNormal16
-                    )
-                    Text(
-                        modifier = Modifier.padding(start = 4.dp),
-                        text = "(${film.year})",
-                        style = Typography.latoNormal16,
-                        color = ApplicationColors.Gray
-                    )
-                }
+                Text(
+                    modifier = Modifier.padding(top = 8.dp),
+                    text = buildAnnotatedString {
+                        append(film.name)
+                        append(" ")
+                        withStyle(style = SpanStyle(color = ApplicationColors.Gray)) {
+                            append("(${film.date})")
+                        }
+                    },
+                    style = Typography.latoNormal16
+                )
             }
         }
     }
