@@ -80,5 +80,6 @@ fun FilmScreen(navigateBack: () -> Unit, film: Film) {
 
             CustomTextShape(text = "4K", modifier = Modifier.padding(start = 8.dp))
         }
+        Box(modifier = Modifier.fillMaxWidth().height(800.dp))
     }
 }
