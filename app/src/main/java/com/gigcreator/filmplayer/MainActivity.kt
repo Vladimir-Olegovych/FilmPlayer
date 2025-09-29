@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.EnterTransition
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,7 +36,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationHost(){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = HomeDestination) {
+    NavHost(
+        navController = navController,
+        startDestination = HomeDestination,
+        enterTransition = { EnterTransition.None }
+    ) {
         composable<HomeDestination> {
             HomeScreen(navigateFilm = { film -> navController.navigate(FilmDestination(film)) })
         }

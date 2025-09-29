@@ -33,13 +33,12 @@ import com.gigcreator.filmplayer.feature.shared.theme.Typography
 @Composable
 fun FilmScreen(navigateBack: () -> Unit, film: Film) {
     val context = LocalContext.current
-    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(ApplicationColors.MainBackground)
-            .verticalScroll(scrollState)
+            .verticalScroll(rememberScrollState())
     ) {
 
         Box(
