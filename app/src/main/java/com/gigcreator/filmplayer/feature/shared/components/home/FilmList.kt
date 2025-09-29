@@ -26,8 +26,6 @@ import com.gigcreator.filmplayer.feature.shared.theme.Typography
 
 @Composable
 fun FilmList(films: List<Film>, onClick: (Film) -> Unit, modifier: Modifier) {
-    val imagePainter = painterResource(id = R.drawable.ic_loading)
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = modifier
@@ -42,7 +40,7 @@ fun FilmList(films: List<Film>, onClick: (Film) -> Unit, modifier: Modifier) {
             ) {
                 Image(
                     modifier = Modifier.clip(RoundedCornerShape(16.dp)),
-                    painter = imagePainter,
+                    painter = painterResource(id = R.drawable.ic_loading),
                     contentDescription = film.name
                 )
                 Text(
