@@ -14,10 +14,23 @@ import com.gigcreator.filmplayer.R
 val mainFont = Font(R.font.lato_regular)
 
 object Typography {
+    val latoMedium36 = TextStyle(
+        fontFamily = FontFamily(mainFont),
+        fontWeight = FontWeight.Medium,
+        fontSize = 36.sp,
+        color = Color.White
+    )
     val latoMedium24 = TextStyle(
         fontFamily = FontFamily(mainFont),
         fontWeight = FontWeight.Medium,
         fontSize = 24.sp,
+        color = Color.White
+    )
+
+    val latoMedium16 = TextStyle(
+        fontFamily = FontFamily(mainFont),
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
         color = Color.White
     )
 
@@ -31,7 +44,7 @@ object Typography {
     val latoNormal12 = TextStyle(
         fontFamily = FontFamily(mainFont),
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 12.sp,
         color = Color.White
     )
 

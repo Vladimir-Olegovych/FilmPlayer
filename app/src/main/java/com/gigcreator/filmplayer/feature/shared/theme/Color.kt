@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 object ApplicationColors {
     val GrayTagBackground = Color(0xFF21202A)
+    val Gray2 = Color(0xFFE0E0E0)
     val Gray = Color(0xFFBCBCBC)
     val Orange = Color(0xFFFF8F71)
     val Red = Color(0xFFEF2D1A)

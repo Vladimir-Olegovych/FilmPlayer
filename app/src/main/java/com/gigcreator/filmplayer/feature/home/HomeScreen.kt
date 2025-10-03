@@ -17,9 +17,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -80,15 +82,19 @@ private fun HomeScreenContent(uiState: HomeScreenUiState, navigateFilm: (Film) -
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
     Column(
-        modifier = Modifier.background(ApplicationColors.MainBackground).fillMaxSize()
+        modifier = Modifier
+            .background(ApplicationColors.MainBackground)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = context.getString(R.string.main_header),
-            style = Typography.latoMedium24,
+            style = Typography.latoMedium36,
             color = Color.White,
-            modifier = Modifier.fillMaxWidth().padding(
-                top = 36.dp, start = 24.dp, end = 24.dp
-            )
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 36.dp, start = 24.dp, end = 24.dp),
+            textAlign = TextAlign.Center
         )
         SearchBar(
             query = query,
